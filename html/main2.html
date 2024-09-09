@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>산업 분야 선택</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+            color: #333;
+        }
+        h1 {
+            color: #6200ee;
+            font-size: 1.5em;
+        }
+        .subtitle {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .step-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .step-circle {
+            background-color: #6200ee;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            z-index: 1;
+        }
+        .step-text {
+            font-size: 1em;
+            font-weight: bold;
+            margin-left: 10px;
+            z-index: 1;
+        }
+        .progress-bar-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .progress-bar {
+            height: 10px;
+            width: 70%;
+            background-color: #e0e0e0;
+            position: relative;
+            margin: auto;
+            z-index: 0;
+        }
+
+        .progress {
+            width: 33%; /* 33%로 설정 */
+            height: 100%;
+            background-color: #6200ee;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 800px;
+            margin: auto;
+        }
+        .grid-item {
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #fafafa;
+            transition: background-color 0.3s;
+            color: #333;
+        }
+        .grid-item:hover {
+            background-color: #e8f0ff;
+            cursor: pointer;
+        }
+        .grid-item.selected {
+            background-color: #6200ee;
+            color: #fff;
+        }
+        .category {
+            margin-top: 10px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        .grid-item.selected .category {
+            color: #cccccc;
+        }
+        .footer {
+            margin-top: 20px;
+        }
+        .footer button {
+            background-color: #6200ee;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        .footer button:hover {
+            background-color: #5700cc;
+        }
+    </style>
+</head>
+<body>
+    <h1>산업 분야를 선택해주세요.</h1>
+    <p class="subtitle">답변에 따라 <strong>최적의 인증</strong>을 추천해 드릴게요.</p>
+    <div class="step-header">
+        <div class="step-circle">1</div>
+        <span class="step-text">산업 분야 선택</span>
+    </div>
+
+    <div class="progress-bar-container">
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+    </div>
+
+
+    <div class="grid">
+        <!-- Grid items here -->
+        <div class="grid-item" onclick="selectCategory(this)">
+            <div>건설업</div>
+            <div class="category">Construction</div>
+        </div>
+        <div class="grid-item" onclick="selectCategory(this)">
+            <div>공공 및 정부기관</div>
+            <div class="category">Public Sector</div>
+        </div>
+        <div class="grid-item" onclick="selectCategory(this)">
+            <div>교육</div>
+            <div class="category">Education</div>
+        </div>
+        <div class="grid-item" onclick="selectCategory(this)">
+            <div>금융</div>
+            <div class="category">Finance</div>
+        </div>
+        <div class="grid-item" onclick="selectCategory(this)">
+            <div>쇼핑/소매</div>
+           
+            <div class="category">Retail</div>
+        </div>
+        <div class="grid-item" onclick="selectCategory(this)">
+            <div>식음료</div>
+            <div class="category">Food</div>
+        </div>
+        <div class="grid-item" onclick="selectCategory(this)">
+            <div>에너지/자원</div>
+            <div class="category">Energy & Resource</div>
+        </div>
+        <div class="grid-item" onclick="selectCategory(this)">
+            <div>엔지니어링</div>
+            <div class="category">Engineering</div>
+        </div>
+        <div class="grid-item" onclick="selectCategory(this)">
+            <div>운송</div>
+            <div class="category">Logistics</div>
+        </div>
+        <div class="grid-item" onclick="selectCategory(this)">
+            <div>의료/제약</div>
+            <div class="category">Medical & Pharma</div>
+        </div>
+        <div class="grid-item" onclick="selectCategory(this)">
+            <div>정보기술</div>
+            <div class="category">IT</div>
+        </div>
+        <div class="grid-item" onclick="selectCategory(this)">
+            <div>제조업</div>
+            <div class="category">Manufacturing</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <button onclick="goToNextPage()">다음 &rarr;</button>
+    </div>
+
+    <script>
+        let selectedCategory = null;
+
+        function selectCategory(element) {
+            document.querySelectorAll('.grid-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            selectedCategory = element.querySelector('.category').textContent;
+        }
+
+        function goToNextPage() {
+            if (!selectedCategory) {
+                alert('산업 분야를 선택해주세요.');
+                return;
+            }
+            const url = `main3.html?category=${encodeURIComponent(selectedCategory)}`;
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>

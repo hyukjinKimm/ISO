@@ -1,0 +1,25 @@
+body {
+    font-family: Arial, sans-serif;
+}
+.industry-list {
+    margin: 20px;
+}
+.industry-list button {
+    display: block;
+    margin: 5px 0;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.industry-list button:hover {
+    background-color: #0056b3;
+}
+.iso-standards {
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
